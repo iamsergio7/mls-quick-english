@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import CourseVideoDescription from "./_components/CourseVideoDescription";
 import GlobalApi from "@/app/_utils/GlobalApi";
 import CourseEnrollSection from "./_components/CourseEnrollSection";
+import CourseContentSection from "./_components/CourseContentSection";
 
 function CoursePreview({ params }) {
   const [courseInfo, setCourseInfo] = useState([]);
@@ -32,12 +33,10 @@ function CoursePreview({ params }) {
       </div>
 
       {/* Course Content*/}
-<div>
-  <CourseEnrollSection />
-</div>
-
-
-
+      <div>
+        <CourseEnrollSection />
+        <CourseContentSection courseInfo={courseInfo}/>
+      </div>
     </div>
   );
 }
