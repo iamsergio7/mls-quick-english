@@ -1,16 +1,22 @@
 "use client"
 
-import { BadgeIcon, BookOpen, GraduationCap } from "lucide-react";
+import { BadgeIcon, BookOpen, GraduationCap, LayoutDashboard, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { useUser } from "@clerk/nextjs";
 
 function SideNav() {
+
+  const {user} = useUser();
   const menu = [
-    { id: 1, name: "All Courses", icon: BookOpen, path:"/courses"},
-    { id: 2, name: "Membership", icon: BadgeIcon, path:"/membership"},
-    { id: 3, name: "Be Instructor", icon: GraduationCap, path:"/instructor"},
+    { id: 4, name: "Dashboard", icon: LayoutDashboard, path:"/dashboard",auth:user},
+    { id: 1, name: "All Courses", icon: BookOpen, path:"/courses",auth:true},
+    { id: 2, name: "Membership", icon: BadgeIcon, path:"/membership",auth:true},
+    { id: 3, name: "Be Instructor", icon: GraduationCap, path:"/instructor", auth:true},
+    { id: 5, name: "Newsletter", icon: Mail, path:"/newsletter", auth:true},
+
   ];
 
 
@@ -27,7 +33,7 @@ function SideNav() {
 
       {/* Menu List*/}
       <div className="mt-5">
-        {menu.map((item, index) => (
+        {menu.map((item, index) =>item.auth&&(
           <Link href={item.path}>
             <div
               key={item.id}

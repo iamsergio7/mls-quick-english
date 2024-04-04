@@ -5,7 +5,7 @@ function CourseContentSection({ courseInfo }) {
   const [activeIndex, setActiveIndex] = React.useState(0);
 
   return (
-    <div className="p-3 bg-white rounded-sm">
+    <div className="p-3 bg-white rounded-sm mt-3">
       <h2 className="text-[22px] font-bold">Course Contents</h2>
       {courseInfo &&
         courseInfo.chapter &&
