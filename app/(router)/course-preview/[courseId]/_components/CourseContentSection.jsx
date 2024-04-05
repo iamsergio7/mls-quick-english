@@ -1,7 +1,7 @@
 import React from "react";
-import { Lock,Play } from "lucide-react";
+import { Lock, Play } from "lucide-react";
 
-function CourseContentSection({ courseInfo }) {
+function CourseContentSection({ courseInfo, isUserAlreadyEnrolled }) {
   const [activeIndex, setActiveIndex] = React.useState(0);
 
   return (
@@ -14,12 +14,15 @@ function CourseContentSection({ courseInfo }) {
             {" "}
             {/* Añade una key única para cada iteración */}
             <h2
-              className={`p-2 text-[14px] flex justify-between items-center m-2 hover:bg-gray-200 hover:text-gray-500 border rounded-sm px-4 cursor-pointer ${
-                activeIndex == index && "bg-primary text-white"
-              }`}
+              className={`p-2 text-[14px] flex justify-between items-center m-2 hover:bg-gray-200 hover:text-gray-500 border rounded-sm px-4 cursor-pointer 
+              ${activeIndex == index && "bg-orange-400 text-white"}
+              ${isUserAlreadyEnrolled&&'hover:bg-orange-400 hover:text-white'}
+              `}
+
+              
             >
               {index + 1}. {item.name}
-              {activeIndex == index ? (
+              {activeIndex == index|| isUserAlreadyEnrolled? (
                 <Play
                   className="h-4 w-4"
                   onClick={() => setActiveIndex(null)}

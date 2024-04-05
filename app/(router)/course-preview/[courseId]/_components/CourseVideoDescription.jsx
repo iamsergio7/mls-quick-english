@@ -3,7 +3,6 @@ import VideoPlayer from "./VideoPlayer";
 import Markdown from "react-markdown";
 
 function CourseVideoDescription({ courseInfo }) {
-  // Asegurarse de que courseInfo.chapter y el video existan, de lo contrario establecer videoUrl como undefined o una URL predeterminada
   const videoUrl = courseInfo?.chapter?.[0]?.video?.url;
 
   return (
@@ -12,7 +11,7 @@ function CourseVideoDescription({ courseInfo }) {
       <h2 className="text-gray-500 text-[14px] mb-3">{courseInfo.author}</h2>
       {/* Video Player */}
       {videoUrl ? (
-        <VideoPlayer videoUrl={videoUrl} />
+        <VideoPlayer videoUrl={videoUrl} poster={courseInfo?.banner?.url}/>
       ) : (
         <p>Video not available.</p> // O manejar la ausencia del video de manera diferente
       )}

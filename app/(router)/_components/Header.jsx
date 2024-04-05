@@ -1,9 +1,9 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { BellDot, Link, Search } from "lucide-react";
+import { BellDot, Search } from "lucide-react";
 import { UserButton, useUser } from "@clerk/nextjs";
-
+import Link from "next/link";
 function Header() {
 
 const {user,isLoaded}=useUser();
