@@ -1,3 +1,4 @@
+// Importar las dependencias necesarias
 import { Button } from "@/components/ui/button";
 import React, { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
@@ -6,41 +7,53 @@ import GlobalApi from "@/app/_utils/GlobalApi";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+/**
+ * Componente funcional que renderiza la sección de inscripción al curso.
+ *
+ * @param {Object} props - Objeto con las propiedades del componente.
+ * @param {Object} props.courseInfo - Objeto con la información del curso.
+ * @param {boolean} props.isUserAlreadyEnrolled - Indica si el usuario ya está inscrito al curso.
+ * @returns {JSX.Element} Elemento JSX que representa el componente.
+ */
 function CourseEnrollSection({ courseInfo, isUserAlreadyEnrolled }) {
+  // Valor simulado para la membresía (se asume que el usuario tiene una membresía)
   const membership = true;
+
+  // Obtener la información del usuario autenticado
   const { user } = useUser();
   const router = useRouter();
 
+  // Efecto secundario que se ejecuta cuando el valor de `isUserAlreadyEnrolled` cambia
   useEffect(() => {
     console.log("isUserAlreadyEnrolled", isUserAlreadyEnrolled);
   }, [isUserAlreadyEnrolled]);
 
-  //Enroll to the Course
+  // Función para inscribir al usuario en el curso
   const onEnrollCourse = () => {
     GlobalApi.enrollToCourse(
       courseInfo?.slug,
       user?.primaryEmailAddress?.emailAddress
     ).then((resp) => {
       console.log(resp);
-
       if (resp) {
-        //Show Toast on Successfull Enroll
-
+        // Mostrar una notificación de éxito al inscribirse
         toast("User Enrolled Successfull", {
           description: "User Enrolled to this Course Successfully",
         });
-
-        //Redirect to Watch Course
+        // Redirigir al usuario a la página de ver el curso
         router.push("/watch-course/" + resp.createUserEnrollCourse.id);
       }
     });
   };
 
   return (
-    <div className="p-3 text-center rounded-sm bg-orange-400 ">
+    <div className="p-3 text-center rounded-sm bg-orange-400">
+      {/* Título de la sección */}
       <h2 className="text-white text-[22px] font-bold">Enroll to the Course</h2>
-      {/* User has Membership and Already Login */}
+
+      {/* Condiciones para renderizar diferentes opciones */}
       {user && (membership || courseInfo.free) && !isUserAlreadyEnrolled ? (
+        // El usuario está autenticado, tiene una membresía o el curso es gratuito, y no está inscrito
         <div className="flex flex-col gap-3 mt-3">
           <h2 className="text-white font-light">
             Enroll Now to Start Learning and Building the project
@@ -53,6 +66,7 @@ function CourseEnrollSection({ courseInfo, isUserAlreadyEnrolled }) {
           </Button>
         </div>
       ) : !user ? (
+        // El usuario no está autenticado
         <div className="flex flex-col gap-3 mt-3">
           <h2 className="text-white font-light">
             Enroll Now to Start Learning and Building the project
@@ -65,6 +79,7 @@ function CourseEnrollSection({ courseInfo, isUserAlreadyEnrolled }) {
         </div>
       ) : (
         !isUserAlreadyEnrolled && (
+          // El usuario está autenticado pero no tiene una membresía y no está inscrito
           <div className="flex flex-col gap-3 mt-3">
             <h2 className="text-white font-light">
               Buy Monthly Membership and Get Access to All Courses
@@ -76,8 +91,7 @@ function CourseEnrollSection({ courseInfo, isUserAlreadyEnrolled }) {
         )
       )}
 
-      {/* Above Section User Does not have Membership or not Signup Login */}
-
+      {/* Si el usuario ya está inscrito, mostrar la opción para continuar */}
       {isUserAlreadyEnrolled && (
         <div className="flex flex-col gap-3 mt-3">
           <h2 className="text-white font-light">
@@ -94,4 +108,5 @@ function CourseEnrollSection({ courseInfo, isUserAlreadyEnrolled }) {
   );
 }
 
+// Exportar el componente para que pueda ser utilizado en otros archivos
 export default CourseEnrollSection;

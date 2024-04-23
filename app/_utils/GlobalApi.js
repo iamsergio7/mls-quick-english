@@ -120,7 +120,47 @@ const checkUserEnrolledToCourse = async(courseId,email) => {
 }
 
 
+const getUserEnrolledCourseDetails = async(id,email) => {
+  const query = gql`
+  query MyQuery {
+    userEnrollCourses(where: {id: "`+id+`", userEmail: "`+email+`"}) {
+      courseId
+      id
+      userEmail
+      courseList {
+        author
+        banner {
+          url
+        }
+        chapter {
+          ... on Chapter {
+            id
+            name
+            video {
+              url
+            }
+            shortDesc
+          }
+        }
+        demoUrl
+        free
+        description
+        id
+        name
+        slug
+        sourceCode
+        totalChapters
+      }
+    }
+  }
+  `
+  const result = await request(MASTER_URL, query);
+  return result;
+}
+
+
+
 
 
 export default { getAllCourseList,
-  getSideBanner, getCourseById, enrollToCourse, checkUserEnrolledToCourse};
+  getSideBanner, getCourseById, enrollToCourse, checkUserEnrolledToCourse, getUserEnrolledCourseDetails};
