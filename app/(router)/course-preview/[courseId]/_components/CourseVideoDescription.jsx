@@ -2,6 +2,7 @@
 import React from "react";
 import VideoPlayer from "./VideoPlayer";
 import Markdown from "react-markdown";
+import { Button } from "@/components/ui/button";
 
 /**
  * Componente funcional que renderiza la descripción del video del curso.
@@ -16,6 +17,7 @@ function CourseVideoDescription({
   courseInfo,
   activeChapterIndex,
   watchMode = false,
+  setChapterCompleted
 }) {
   // Obtener la URL del video del capítulo activo
   const videoUrl = courseInfo?.chapter?.[activeChapterIndex]?.video?.url;
@@ -41,7 +43,12 @@ function CourseVideoDescription({
       {/* Renderizar el título de la descripción */}
       <h2 className="text-[17px] font-semibold mt-5">
         {watchMode ? (
-          <span>{courseInfo?.chapter?.[activeChapterIndex]?.name}</span>
+          <span className="flex justify-between items-center">{courseInfo?.chapter?.[activeChapterIndex]?.name}
+          <Button onClick={() => setChapterCompleted(courseInfo?.chapter?.[activeChapterIndex]?.id) }>
+            Mark as complete
+          </Button>
+          </span>
+          
         ) : (
           <span>Acerca de este curso</span>
         )}

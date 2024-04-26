@@ -18,9 +18,17 @@ function CourseContentSection({
   isUserAlreadyEnrolled,
   watchMode = false,
   setActiveChapterIndex,
+  completedChapter,
 }) {
   // Estado para controlar el índice del capítulo activo
   const [activeIndex, setActiveIndex] = useState(0);
+
+  /**
+   * Función para marcar un capítulo como completado.
+   */
+  const checkIsChapterCompleted = (chapterId) => {
+    return completedChapter.find((item) => item.chapterId == chapterId);
+  };
 
   return (
     <div className="p-3 bg-white rounded-sm mt-3">
@@ -39,7 +47,12 @@ function CourseContentSection({
                 activeIndex === index && "bg-orange-400 text-white"
               } ${
                 isUserAlreadyEnrolled && "hover:bg-orange-400 hover:text-white"
-              }`}
+              } ${
+                watchMode &&
+                checkIsChapterCompleted(item.id) &&
+                "border-green-600 bg-green-400"
+              }
+              `}
               onClick={() => {
                 watchMode && setActiveChapterIndex(index); // Establecer el índice del capítulo activo si está en modo de visualización
                 watchMode && setActiveIndex(index); // Actualizar el estado del índice activo si está en modo de visualización
