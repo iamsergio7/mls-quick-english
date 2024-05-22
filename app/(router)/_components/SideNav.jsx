@@ -1,11 +1,11 @@
 "use client"
 
 // Importar las dependencias necesarias
-import { BadgeIcon, BookOpen, GraduationCap, LayoutDashboard, Mail } from "lucide-react";
+import { BadgeIcon, BookOpen, GraduationCap, LayoutDashboard, Mail, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 
 /**
@@ -36,13 +36,20 @@ function SideNav() {
  }, []);
 
  return (
-   <div className="p-5 bg-orange-400 shadow-sm border h-screen">
+   <div className="p-5 shadow-sm border h-screen flex flex-col items-center bg-gradient-to-t from-[#ED6D70] via-[#F29066] to-[#F5A161]">
+     {/* Botón de menú para dispositivos móviles */}
+     <div className="w-full flex justify-between items-center md:hidden">
+       <Image src="/logo.png" alt="logo" width={100} height={60} />
+     </div>
+     
      {/* Renderizar el logotipo */}
-     <Image src="/logo.png" alt="logo" width={170} height={80} />
-     <hr className="mt-7"></hr>
+     <div className="hidden md:block">
+       <Image src="/logo.png" alt="logo" width={150} height={80} />
+     </div>
+     <hr className="mt-7 hidden md:block"></hr>
 
      {/* Renderizar el menú */}
-     <div className="mt-5">
+     <div className="mt-5 ml-2 w-full">
        {menu.map((item, index) =>
          item.auth && (
            <Link key={item.id} href={item.path}>

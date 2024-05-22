@@ -7,12 +7,12 @@ export default function Page() {
         <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
           <img
             alt=""
-            src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            src="https://scontent.flpb3-1.fna.fbcdn.net/v/t39.30808-6/434841164_883839857088912_1985066918736839810_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=BHG1V1cB_XgQ7kNvgECMkGM&_nc_ht=scontent.flpb3-1.fna&oh=00_AYAHkYroTiOxc1Q2WDcsUt-mFvI_bAD3mD30jYr4UClIsA&oe=66533150"
             className="absolute inset-0 h-full w-full object-cover opacity-80"
           />
 
-          <div className="hidden lg:relative lg:block lg:p-12">
-            <a className="block text-white" href="#">
+        {/*    <div className="hidden lg:relative lg:block lg:p-12">
+          <a className="block text-white" href="#">
               <span className="sr-only">Home</span>
               <svg
                 className="h-8 sm:h-10"
@@ -26,14 +26,14 @@ export default function Page() {
                 />
               </svg>
             </a>
-
+   Contenedor izquierdo 
             <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
               Welcome to Quick English 
             </h2>
             <p className="mt-4 leading-relaxed text-white/90">
             ¡El inglés es como una súper herramienta que no puedes dejar de tener!
             </p>
-          </div>
+          </div>*/}
         </section>
 
         <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">

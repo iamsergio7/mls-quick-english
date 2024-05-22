@@ -15,7 +15,7 @@ import Image from "next/image";
 function CourseItem({ course }) {
  return (
    // Elemento contenedor con estilos aplicados
-   <div className="border rounded-xl hover:shadow-md hover:shadow-orange-300 cursor-pointer">
+   <div className="border rounded-md hover:shadow-md hover:shadow-orange-300 cursor-pointer">
      {/* Renderizar la imagen del banner del curso */}
      <Image
        src={course?.banner?.url}
